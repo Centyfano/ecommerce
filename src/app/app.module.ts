@@ -1,46 +1,31 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
+import { RouterModule } from '@angular/router';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { LayoutModule } from '@angular/cdk/layout';
-import { HttpClientModule } from '@angular/common/http';
-import { ProductsComponent } from './dashboard/products/products.component';
-import { CategoriesComponent } from './dashboard/categories/categories.component';
-import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatListModule } from "@angular/material/list";
-import { CategoryComponent } from './dashboard/categories/category/category.component';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { ProductsModule } from './products/products.module';
+import { AdminModule } from './admin/admin.module';
+import { AppRoutingModule } from './app-routing.module';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    ProductsComponent,
-    CategoriesComponent,
-    CategoryComponent,
-  ],
+  declarations: [AppComponent, AdminDashboardComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
     BrowserAnimationsModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    LayoutModule,
+    RouterModule,
+    AppRoutingModule,
+    AdminModule,
+    
     MatSidenavModule,
     MatListModule,
-    CategoriesModule
+    MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

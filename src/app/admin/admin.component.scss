@@ -1,11 +1,4 @@
-.grid-container {
-  margin: 0px;
-
-  mat-sidenav {
-    width: 200px;
-  }
-
-  .dashboard-card {
+.dashboard-card {
     position: absolute;
     top: 15px;
     left: 15px;
@@ -16,6 +9,3 @@
       text-align: center;
     }
   }
-}
-
-
