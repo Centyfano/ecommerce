@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Product } from './models/product';
 
 @Injectable({
@@ -34,5 +35,31 @@ export class ProductService {
 
   createProduct() {}
 
+  uploadImage(image: any){
+    const url = 'https://ecommerce-apis.herokuapp.com/fileupload/upload-image';
+    return this.http.post(url, image).pipe(
+      map((data: any) => {
+        return data;
+      }),
+      tap((_) => console.log('images uploaded'))
+      // catchError(this.handleError('post image'))
+    ).subscribe(e=>{console.log('posted ',e);});
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+    }
+    // Return an observable with a user-facing error message.
+    return throwError('Something bad happened; please try again later.');
+  }
   generateProductsPdf() {}
 }

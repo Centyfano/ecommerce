@@ -32,6 +32,9 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  onOpenDetails(id: number) {
+    console.log(id);
+  };
   onAddProduct() {
     this.dialog.open(AddProductComponent);
   }

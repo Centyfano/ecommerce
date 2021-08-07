@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { ProductService } from 'src/app/product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -24,7 +25,10 @@ export class AddProductComponent implements OnInit {
     { value: 'test3', viewValue: 'A final category' },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService
+  ) {}
   imagePreview: ArrayBuffer[] | string | undefined;
 
   productForm = this.fb.group({
@@ -39,15 +43,17 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {}
 
   onImagePick(event: Event) {
-    const file = (event.target as HTMLInputElement | any).files;
+    const file:Blob = (event.target as HTMLInputElement | any).files;
     this.productForm.patchValue({ images: [file] });
     this.productForm.get('images')?.updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = <string>reader.result;
-      console.log(this.imagePreview);
-    };
-    reader.readAsDataURL(file);
+    // const reader = new FileReader();
+    // reader.onload = () => {
+    //   this.imagePreview = reader.result;
+    //   console.log(this.imagePreview);
+    // };
+    // reader.readAsDataURL(file);
+
+    this.productService.uploadImage(file);
   }
   onSubmit() {}
 }

@@ -48,11 +48,8 @@
                     required>
             </div>
 
-            <div class="image-preview" *ngIf="imagePreview && imagePreview !== null">
-                <img *ngFor="let image ngForOf imagePreview" [src]="image" [alt]="productForm.value.title">
-            </div>
-
-
+            <p class="prev"> {{imagePreview | json}} </p>
+      
         </div>
     </form>
 </div>

@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="content">
+    
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    
+            <div class="header">
+                <h1>E-commerce</h1>
+                <h3>Welcome back! Please login to continue</h3>
+            </div>
+    
+            <div class="inputs">
+                <div class="form-group">
+                    <input mat-raised-input type="email" id="Email" class="form-control" formControlName="email"
+                        placeholder="Email" required>
+                </div>
+    
+                <div class="form-group">
+                    <input type="password" id="password" class="form-control" formControlName="password"
+                        placeholder="Password" required>
+                </div>
+    
+                <button mat-stroked-button type="submit">Sign Up</button>
+    
+    
+            </div>
+        </form>
+        <div *ngIf="errInfo"> {{errInfo}}</div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +27,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddProductComponent } from './products/add-product/add-product.component';
+import { LoginComponent } from './auth/login/login.component';
+import { HttpInterceptorService } from './http-interceptor.service';
+import { LoginMessageComponent } from './auth/login/login-message/login-message.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,9 @@ import { AddProductComponent } from './products/add-product/add-product.componen
     HomeComponent,
     AddCategoryComponent,
     AddProductComponent,
+    LoginComponent,
+    LoginMessageComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,10 +67,14 @@ import { AddProductComponent } from './products/add-product/add-product.componen
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    
-    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
