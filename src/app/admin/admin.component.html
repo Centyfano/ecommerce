@@ -1,26 +1,60 @@
-<mat-grid-list cols="4" rowHeight="175px">
-    <mat-grid-tile>
-        <mat-card class="dashboard-card">
-            <mat-card-header>
-                <mat-card-title> 28</mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content">
-                <div><button mat-raised-button color="primary" (click)="getProducts()">Products</button>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-card class="dashboard-card">
-            <mat-card-header>
-                <mat-card-title> {{29}} </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content">
-                <div><button mat-raised-button color="primary" (click)="getProducts()">Categories</button>
-                </div>
-            </mat-card-content>
-        </mat-card>
+<mat-sidenav-container class="example-container">
 
+  <mat-sidenav mode="side" [opened]="isOpened">
+    <div class="header">
+      <h1 class="mat-h1">E-commerce</h1>
+    </div>
+    <mat-nav-list>
+      <mat-list-item>
+        <button mat-icon-button>
+          <mat-icon>home</mat-icon>
+        </button>
+        <a matLine routerLink="">Home</a>
+      </mat-list-item>
 
-    </mat-grid-tile>
-</mat-grid-list>
+      <mat-list-item>
+        <button mat-icon-button>
+          <mat-icon>inventory</mat-icon>
+        </button>
+        <a matLine routerLink="/products">Products</a>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button mat-icon-button>
+          <mat-icon>list</mat-icon>
+        </button>
+        <a matLine routerLink="/categories">Categories </a>
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <div class="user-header">
+      <form class="search-form">
+        <input type="text" placeholder="Search">
+        <mat-icon class="mat-icons-round">home</mat-icon>
+      </form>
+    
+      <div class="user-panel">
+        <span mat-mini-fab>
+          <mat-icon>notifications</mat-icon>
+        </span>
+
+        <span mat-mini-fab>
+          <mat-icon>help_outline</mat-icon>
+        </span>
+
+        <span class="user">
+          <img src="assets/doe.jpeg">
+          <span>Jane Doe</span>
+        </span>
+        
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

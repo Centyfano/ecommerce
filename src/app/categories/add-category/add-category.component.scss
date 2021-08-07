@@ -1,0 +1,51 @@
+mat-card-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  // border-bottom: 1px solid $primary;
+}
+.content {
+  width: 100%;
+  padding: 0;
+
+  .spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  form {
+    margin: 0;
+    .header {
+      // width: 100%;
+      // margin: 10px;
+      border-bottom: 1px solid blue; //primary
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+
+      span{
+        padding-top: 10px;
+      }
+
+      button{
+        border: 1px solid blue;
+        color: blue;
+      }
+    }
+
+    .inputs{
+      padding: 20px;
+
+      #name{
+        width: 90%;
+        padding: 10px;
+        margin: 5px;
+        outline: none;
+        border: 1px solid blue;
+        border-radius: 5px;
+      }
+    }
+  }
+  // height: calc(100vh - 20px);
+}

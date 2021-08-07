@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../product.service';
 import { Product } from '../models/product';
-import { ProductService } from './product.service';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddProductComponent } from './add-product/add-product.component';
 
 @Component({
   selector: 'app-products',
@@ -9,20 +13,28 @@ import { ProductService } from './product.service';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  colsDisplayed = ['id', 'title'];
-  fetched: boolean = false || true;
-  count: number | undefined;
-  constructor(private productService: ProductService) {}
+  hasLoaded: boolean | undefined;
+  hasgone = false;
+
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+
+  constructor(
+    public productService: ProductService,
+    public dialog: MatDialog
+  ) {}
 
   getProducts() {
-    this.fetched = false;
-    this.productService.viewProducts().subscribe((prod: any) => {
-      this.products = prod;
-      this.count = this.products.length;
+    this.productService.viewProducts().subscribe((data: any) => {
+      this.products = data.products;
       console.log(this.products);
+      this.hasLoaded = true;
     });
   }
 
+  onAddProduct() {
+    this.dialog.open(AddProductComponent);
+  }
   ngOnInit(): void {
     this.getProducts();
   }

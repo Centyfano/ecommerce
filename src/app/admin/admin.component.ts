@@ -1,23 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../models/product';
-import { ProductService } from '../products/product.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
+  styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
-  products: Product[] = [];
-  count: number | undefined;
-  constructor(private productService: ProductService) {}
+export class AdminComponent {
 
-  ngOnInit(): void {}
-  getProducts() {
-    this.productService.viewProducts().subscribe((prod: any) => {
-      this.products = prod;
-      this.count = this.products.length;
-      console.log(this.products);
-    });
-  }
+  isOpened = true;
+  constructor(){}
 }
