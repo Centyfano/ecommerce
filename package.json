@@ -1,12 +1,13 @@
 {
   "name": "ecommerce",
-  "version": "0.0.0","engines": {
+  "version": "0.0.0",
+  "engines": {
     "node": "16.x"
   },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
