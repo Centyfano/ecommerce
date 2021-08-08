@@ -7,3 +7,13 @@
     width: 85%;
     margin: 10px;
 }
+.header{
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span{
+    color: #fff;
+  }
+}

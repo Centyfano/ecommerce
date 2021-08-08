@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Product } from './models/product';
 
@@ -33,17 +33,44 @@ export class ProductService {
     );
   }
 
+  productSource: any;
+  products: any;
+
+  shareData(data: any) {
+    this.productSource = new BehaviorSubject(data);
+    this.products = this.productSource.asObservable();
+    return this.productSource.asObservable().then(console.log(3));
+  }
+
+  getData() {
+    return this.products;
+  }
+
   createProduct() {}
 
-  uploadImage(image: any){
+  public editDataDetails: any = [];
+  // public subject = new Subject<any>();
+  private messageSource = new BehaviorSubject(this.editDataDetails);
+  currentMessage = this.messageSource.asObservable();
+
+  sendData(message: any) {
+    this.messageSource.next(message);
+  }
+
+  uploadImage(image: any) {
     const url = 'https://ecommerce-apis.herokuapp.com/fileupload/upload-image';
-    return this.http.post(url, image).pipe(
-      map((data: any) => {
-        return data;
-      }),
-      tap((_) => console.log('images uploaded'))
-      // catchError(this.handleError('post image'))
-    ).subscribe(e=>{console.log('posted ',e);});
+    return this.http
+      .post(url, image)
+      .pipe(
+        map((data: any) => {
+          return data;
+        }),
+        tap((_) => console.log('images uploaded'))
+        // catchError(this.handleError('post image'))
+      )
+      .subscribe((e) => {
+        console.log('posted ', e);
+      });
   }
 
   private handleError(error: HttpErrorResponse) {

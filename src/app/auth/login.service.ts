@@ -4,6 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { LoginUser } from '../models/user';
@@ -13,7 +14,10 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  isLoggedIn: boolean = false;
+  redirectUrl: string | null = null;
+
+  constructor(private http: HttpClient, private router: Router) {}
 
   private options = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -30,7 +34,11 @@ export class LoginService {
     return this.http.post<LoginUser>(url, user, this.options).pipe(
       tap((e: any) => {
         this.accessToken = e.access;
-        this.authService.login();
+        this.isLoggedIn = true;
+        if (this.redirectUrl) {
+          this.router.navigate([this.redirectUrl]);
+          this.redirectUrl = null;
+        }
       }),
       catchError(this.handleError)
     );
@@ -44,6 +52,12 @@ export class LoginService {
       console.error(error);
     }
     // Return an observable with a user-facing error message.
-    return throwError(error.error.detail);
+    const custom = 'Please check that correct data is entered';
+    return throwError(error.error.detail || custom);
+  }
+
+  logoutUser(): void {
+    this.isLoggedIn = false;
+    this.router.navigateByUrl('/login')
   }
 }

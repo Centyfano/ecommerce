@@ -9,21 +9,21 @@
         <button mat-icon-button>
           <mat-icon>home</mat-icon>
         </button>
-        <a matLine routerLink="">Home</a>
+        <a matLine routerLink="" routerLinkActive="active">Home</a>
       </mat-list-item>
 
       <mat-list-item>
         <button mat-icon-button>
           <mat-icon>inventory</mat-icon>
         </button>
-        <a matLine routerLink="/products">Products</a>
+        <a matLine routerLink="/products" routerLinkActive="active">Products</a>
       </mat-list-item>
 
       <mat-list-item>
         <button mat-icon-button>
           <mat-icon>list</mat-icon>
         </button>
-        <a matLine routerLink="/categories">Categories </a>
+        <a matLine routerLink="/categories" routerLinkActive="active">Categories </a>
       </mat-list-item>
 
     </mat-nav-list>
@@ -34,7 +34,7 @@
     <div class="user-header">
       <form class="search-form">
         <input type="text" placeholder="Search">
-        <mat-icon class="mat-icons-round">home</mat-icon>
+        <!-- <mat-icon class="mat-icons-round">home</mat-icon> -->
       </form>
     
       <div class="user-panel">
@@ -46,10 +46,13 @@
           <mat-icon>help_outline</mat-icon>
         </span>
 
-        <mat-card>
+        <button class="user" mat-button [matMenuTriggerFor]="menu">
           <img src="assets/doe.jpeg">
-          <span>Jane Doe</span>
-        </mat-card>
+          <span>John Doe</span>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onLogout()">Logout</button>
+        </mat-menu>
        
         
       </div>

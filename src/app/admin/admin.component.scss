@@ -10,7 +10,7 @@
   mat-list-item{
     color: $primary;
 
-    &:hover{
+    &:hover, .active{
       color: $accent
     }
   }
@@ -38,7 +38,7 @@
         width: 20%;
 
         input{
-          width: 100%;
+          // width: 100%;
           padding: 15px;
           outline: none;
           border: none;
@@ -56,9 +56,10 @@
         margin: 1px;
         display: flex;
         padding: 5px;
-        justify-content: space-evenly;
+        justify-content: space-around;
+        align-items: center;
 
-        span{
+        span, .user{
           cursor: pointer;
 
           &:hover{
@@ -70,12 +71,21 @@
         .user{
           display: flex;
           justify-content: space-around;
-          // width: 25%;
-
+          padding: 0;
+          width: 45%;
+          background-color: inherit;
+          color: $white;
+          font-weight: normal;
+          align-items: center;
           img{
             width: 20%;
             height: auto;
             border-radius: 50%;
+          }
+
+          span{
+            margin: 10px;
+            margin-top: 5px;
           }
         }
       }

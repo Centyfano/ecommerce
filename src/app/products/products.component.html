@@ -1,26 +1,54 @@
-<div class="wrapper" *ngIf="!hasLoaded">
-  <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode">
-  </mat-progress-spinner>
+<div class="header">
+  <span *ngIf="hasLoaded">Total number of products: <b>{{totalProd}}</b></span>
+  <button mat-raised-button (click)="onAddProduct()">Add Product</button>
 </div>
 
+<div class="wrapper" *ngIf="!hasLoaded">
+  <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode"></mat-progress-spinner>
+</div>
 
-<button mat-raised-button (click)="onAddProduct()">Add Product</button>
+<div class="content" *ngIf="hasLoaded">
+  <mat-accordion>
+    <mat-card *ngIf="!panelOpenState" class="headings mat-body-strong">
+      <div class="headings-title">Title</div>
+      <div class="headings-description">Description</div>
+    </mat-card>
+    <mat-expansion-panel *ngFor="let product of products" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title [ngClass]="panelOpenState ? 'mat-body-strong' : ''"> {{product.title}} </mat-panel-title>
+        <mat-panel-description> {{product.description}} </mat-panel-description>
+      </mat-expansion-panel-header>
 
+      <div class="contents">
+          <div class="image">
+            <img mat-card-image *ngFor="let image of product.images" [src]="image.image"
+              [alt]="'Photo of a '+ product.title">
+          </div>
+          <mat-card-content>
+            <div class="detail-flex">
+              <div><span class="mat-body-strong">Product ID </span> <br> <span>{{product.id}}</span><br></div>
+              <div><span class="mat-body-strong">Title </span> <br> {{product.title}}</div><br>
+            </div>
 
-<table class="mat-elevation-z8" *ngIf="!hasLoaded && hasgone">
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </tr>
-    <tr *ngFor="let product of products" (click)="onOpenDetails(12)">
-      <td>{{product.id}}</td>
-      <td>{{product.title}}s</td>
-      <td>{{product.quantity}}</td>
-      <td>{{product.price}}</td>
-    </tr>
-</table>
+            <div class="detail-flex">
+              <div><span class="mat-body-strong">Price </span><br>{{product.price}}</div><br>
+              <div><span class="mat-body-strong">Quantity </span><br>{{product.quantity}}</div><br>
+            </div>
 
-<!-- {{products | json}} -->
+            <div class="detail-flex">
+              <div><span class="mat-body-strong">Category </span>
+                <li *ngFor="let cat of product.category">{{cat.name}}</li>
+              </div>
+              <div><span class="mat-body-strong">Seller </span><br><a [title]="'Send email to '+product.seller.email" [href]="'mailto:'+product.seller.email"><span class="name">{{product.seller.name }}</span></a></div>
+            </div>
+
+            <div><span class="mat-body-strong">Description </span> <br> {{product.description}}</div><br>
+            
+          </mat-card-content>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+
+  <!-- {{products | json}} -->

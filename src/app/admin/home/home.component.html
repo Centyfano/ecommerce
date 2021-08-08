@@ -1,18 +1,10 @@
 <div class="grid-container">
-
     <mat-grid-list cols="4" rowHeight="120px">
         <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
             <mat-card class="dashboard-card">
                 <mat-card-header>
                     <mat-card-title>
                         {{card.title}}
-                        <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #menu="matMenu" xPosition="before">
-                            <button mat-menu-item>Expand</button>
-                            <button mat-menu-item>Remove</button>
-                        </mat-menu>
                     </mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="dashboard-card-content">
@@ -21,4 +13,40 @@
             </mat-card>
         </mat-grid-tile>
     </mat-grid-list>
+
+    <mat-card>
+        <div class="table-header"> 
+            <div class="heading">
+                <h1 class="mat-title">Our Products</h1>
+            </div>
+            <div class="buttons">
+                <button mat-flat-button class="accent">New Category</button>
+                <button mat-flat-button class="accent">New Product</button>
+                <button mat-stroked-button class="stroked" (click)="generatePdf()">Download</button>
+            </div>
+        </div> 
+        <mat-card-content class="table-content">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Product Category</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+                <tr *ngIf="!hasLoaded" >
+                    <td class="spinner-container" colspan="5" >
+                        <mat-progress-spinner [color]="color" [mode]="mode"></mat-progress-spinner>
+                    </td>
+                </tr>
+                <tr *ngFor="let product of products">
+                    <td> {{product.id}} </td>
+                    <td> {{product.title}} </td>
+                    <td> <li *ngFor="let cat of product.category">{{cat.name}}</li> </td>
+                    <td> {{product.price}} </td>
+                    <td> <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"><mat-icon>menu</mat-icon></button> </td>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
 </div>

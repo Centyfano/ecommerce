@@ -1,7 +1,6 @@
 <div class="content">
     <div class="spinner-wrapper" *ngIf="!hasLoaded">
-        <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode">
-        </mat-progress-spinner>
+        <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode"></mat-progress-spinner>
     </div>
     <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" *ngIf="hasLoaded">
 
