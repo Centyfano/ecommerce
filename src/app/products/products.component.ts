@@ -57,10 +57,10 @@ export class ProductsComponent implements OnInit, OnDestroy, PipeTransform {
   }
 
   ngOnInit(): void {
-    // this.getProducts();
-    this.productService.currentMessage.subscribe((data) => {
-      this.products = data;
-    });
+    this.getProducts();
+    // this.productService.currentMessage.subscribe((data) => {
+    //   this.products = data;
+    // });
   }
 
   ngOnDestroy() {

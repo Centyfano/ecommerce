@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { AddProductComponent } from 'src/app/products/add-product/add-product.component';
 
 @Component({
   selector: 'app-home',
@@ -59,6 +60,11 @@ export class HomeComponent implements OnInit {
       console.log('prod are', this.products);
       this.productService.sendData(data);
       this.hasLoaded = true;
+    });
+  }
+  addProductModal(){
+    this.dialog.open(AddProductComponent, {
+      width: '50vw',
     });
   }
 
