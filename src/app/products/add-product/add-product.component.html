@@ -7,8 +7,8 @@
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()" *ngIf="!hasLoaded">
 
         <div class="header">
-            <span>Add Product</span>
-            <button mat-stroked-button type="submit" [disabled]="!productForm.valid"> Add category</button>
+            <span>New Product</span>
+            <button mat-stroked-button type="submit" [disabled]="!productForm.valid"> Add Product</button>
         </div>
 
         <div class="inputs">
@@ -30,10 +30,10 @@
             </div>
 
             <div class="form-group">
-                <label for="category">Category</label>
-                <select name="category" id="category" class="form-control" formControlName="category" required>Category
-                    <option *ngFor="let category of categories" [value]="category.value"> {{category.viewValue}} </option>
-                </select>
+                <mat-label for="category">Category</mat-label>
+                <mat-select name="category" id="category" class="form-control" formControlName="category" required>
+                    <mat-option *ngFor="let category of categories" [value]="category.value"> {{category.viewValue}} </mat-option>
+                </mat-select>
             </div>
 
             <div class="form-group">
@@ -44,8 +44,8 @@
 
             <div class="form-group">
                 <label for="category">Upload Image</label>
-                <input mat-raised-button type="file" id="category" class="form-control" formControlName="images" placeholder="Upload Image" (change)="onImagePick($event)" multiple
-                    required>
+                <button mat-flat-button class="image-btn" type="button" (click)="filePicker.click()">Pick Image</button>
+      <input type="file" #filePicker (change)="onImagePick($event)" multiple>
             </div>
 
             <p class="prev"> {{imagePreview | json}} </p>

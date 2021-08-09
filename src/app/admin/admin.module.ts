@@ -26,6 +26,7 @@ import { AddProductComponent } from '../products/add-product/add-product.compone
 import { CategoriesComponent } from '../categories/categories.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from '../products/products.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ProductsComponent } from '../products/products.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule
   ],
 })
 export class AdminModule {}

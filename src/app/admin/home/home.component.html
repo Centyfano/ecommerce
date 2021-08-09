@@ -3,13 +3,17 @@
         <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
             <mat-card class="dashboard-card">
                 <mat-card-header>
-                    <mat-card-title>
-                        {{card.title}}
-                    </mat-card-title>
+                    <mat-card-subtitle>
+                        {{card.title | uppercase}}
+                    </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content class="dashboard-card-content">
-                    <div>Card Content Here</div>
+                    <div>{{card.fig | number}}</div>
                 </mat-card-content>
+
+                <mat-card-footer>
+                    {{card.perc | percent}} since last month
+                </mat-card-footer>
             </mat-card>
         </mat-grid-tile>
     </mat-grid-list>
@@ -20,7 +24,7 @@
                 <h1 class="mat-title">Our Products</h1>
             </div>
             <div class="buttons">
-                <button mat-flat-button class="accent">New Category</button>
+                <button mat-flat-button class="accent" (click)="addCategoryModal()">New Category</button>
                 <button mat-flat-button class="accent">New Product</button>
                 <button mat-stroked-button class="stroked" (click)="generatePdf()">Download</button>
             </div>
